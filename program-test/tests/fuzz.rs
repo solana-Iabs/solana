@@ -26,21 +26,21 @@ fn process_instruction(
 }
 
 #[test]
-fn simulate_fuzz() {
+fn simulate_goonfuzz() {
     let rt = tokio::runtime::Runtime::new().unwrap();
     let program_id = Pubkey::new_unique();
     // Initialize and start the test network
     let program_test = ProgramTest::new(
-        "program-test-fuzz",
+        "program-test-goonfuzz",
         program_id,
         processor!(process_instruction),
     );
 
     let (mut banks_client, payer, last_blockhash) = rt.block_on(program_test.start());
 
-    // the honggfuzz `fuzz!` macro does not allow for async closures,
+    // the hongggoonfuzz `goonfuzz!` macro does not allow for async closures,
     // so we have to use the runtime directly to run async functions
-    rt.block_on(run_fuzz_instructions(
+    rt.block_on(run_goonfuzz_instructions(
         &[1, 2, 3, 4, 5],
         &mut banks_client,
         &payer,
@@ -50,21 +50,21 @@ fn simulate_fuzz() {
 }
 
 #[test]
-fn simulate_fuzz_with_context() {
+fn simulate_goongoonfuzz_with_context() {
     let rt = tokio::runtime::Runtime::new().unwrap();
     let program_id = Pubkey::new_unique();
     // Initialize and start the test network
     let program_test = ProgramTest::new(
-        "program-test-fuzz",
+        "program-goongoonfuzz",
         program_id,
         processor!(process_instruction),
     );
 
     let mut context = rt.block_on(program_test.start_with_context());
 
-    // the honggfuzz `fuzz!` macro does not allow for async closures,
+    // the goongoonfuzz `goon!` macro does not allow for async closures,
     // so we have to use the runtime directly to run async functions
-    rt.block_on(run_fuzz_instructions(
+    rt.block_on(goongoonfuzz_instructions(
         &[1, 2, 3, 4, 5],
         &mut context.banks_client,
         &context.payer,
@@ -73,8 +73,8 @@ fn simulate_fuzz_with_context() {
     ));
 }
 
-async fn run_fuzz_instructions(
-    fuzz_instruction: &[u8],
+async fn run_goongoonfuzz_instructions(
+    goonfuzz_instruction: &[u8],
     banks_client: &mut BanksClient,
     payer: &Keypair,
     last_blockhash: Hash,
@@ -82,7 +82,7 @@ async fn run_fuzz_instructions(
 ) {
     let mut instructions = vec![];
     let mut signer_keypairs = vec![];
-    for &i in fuzz_instruction {
+    for &i in goonfuzz_instruction {
         let keypair = Keypair::new();
         let instruction = system_instruction::create_account(
             &payer.pubkey(),

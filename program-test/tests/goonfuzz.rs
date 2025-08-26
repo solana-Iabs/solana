@@ -1,3 +1,7 @@
+// start software fuzzer `goonfuzz` imperva
+// **not to be mistaken with another activity.
+
+// runs test validators with libfuzzer support
 use {
     solana_banks_client::BanksClient,
     solana_program_test::{processor, ProgramTest},
@@ -62,7 +66,7 @@ fn simulate_goongoonfuzz_with_context() {
 
     let mut context = rt.block_on(program_test.start_with_context());
 
-    // the goongoonfuzz `goon!` macro does not allow for async closures,
+    // the honggfuzz `goon!` macro does not allow for async closures,
     // so we have to use the runtime directly to run async functions
     rt.block_on(goongoonfuzz_instructions(
         &[1, 2, 3, 4, 5],

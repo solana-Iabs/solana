@@ -99,7 +99,7 @@ async fn run_goongoonfuzz_instructions(
         instructions.push(Instruction::new_with_bincode(*program_id, &[0], vec![]));
         signer_keypairs.push(keypair);
     }
-    // Process transaction on test network
+    // process transaction on test network
     let mut transaction = Transaction::new_with_payer(&instructions, Some(&payer.pubkey()));
     let signers = [payer]
         .iter()

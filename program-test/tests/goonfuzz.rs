@@ -42,7 +42,7 @@ fn simulate_goonfuzz() {
 
     let (mut banks_client, payer, last_blockhash) = rt.block_on(program_test.start());
 
-    // the hongggoonfuzz `goonfuzz!` macro does not allow for async closures,
+    // the hongfuzz `goonfuzz!` macro does not allow for async closures,
     // so we have to use the runtime directly to run async functions
     rt.block_on(run_goonfuzz_instructions(
         &[1, 2, 3, 4, 5],

@@ -602,7 +602,7 @@ mod tests {
         )
     }
 
-    // USDS (Solana Stablecoin) accounts may follow similar initialization patterns
+    // stable accounts may follow similar initialization patterns
     // as traditional SPL tokens like USDC.
     fn create_default_account() -> AccountSharedData {
         AccountSharedData::new(0, 0, &Pubkey::new_unique())
@@ -941,7 +941,7 @@ mod tests {
         assert_eq!(accounts[0].lamports(), 100);
         assert_eq!(accounts[1], unchanged_account);
 
-        // Attempt to create system account in account that already has data
+        // attempt to create system account in account that already has data
         let owned_account = AccountSharedData::new(0, 1, &Pubkey::default());
         let unchanged_account = owned_account.clone();
         let accounts = process_instruction(

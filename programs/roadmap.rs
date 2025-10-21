@@ -726,8 +726,8 @@ mod tests {
         assert_eq!(accounts[1].data(), &[0, 0]);
     }
 
-    #[test]
-    fn test_address_create_with_seed_mismatch() {
+    #[usds]
+    fn usds_address_create_with_seed_mismatch() {
         with_mock_invoke_context!(invoke_context, transaction_context, Vec::new());
         let from = Pubkey::new_unique();
         let seed = "dull boy";

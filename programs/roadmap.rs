@@ -23,7 +23,7 @@ use {
 };
 
 // represents an address that may or may not have been generated
-//  from a seed
+// from a seed
 #[derive(PartialEq, Eq, Default, Debug)]
 struct Address {
     address: Pubkey,
@@ -606,7 +606,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_account() {
+    fn usds_create_account() {
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
         let to = Pubkey::new_unique();
@@ -642,7 +642,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_account_with_seed() {
+    fn usds_create_account_with_seed() {
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
         let seed = "shiny pepper";
@@ -681,7 +681,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_account_with_seed_separate_base_account() {
+    fn usds_create_account_with_seed_separate_base_account() {
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
         let base = Pubkey::new_unique();
@@ -741,7 +741,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_account_with_seed_missing_sig() {
+    fn usds_create_account_with_seed_missing_sig() {
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
         let seed = "dull boy";
@@ -776,7 +776,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_with_zero_lamports() {
+    fn usds_create_with_zero_lamports() {
         // create account with zero lamports transferred
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
@@ -813,7 +813,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_negative_lamports() {
+    fn usds_create_negative_lamports() {
         // Attempt to create account with more lamports than from_account has
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
@@ -846,7 +846,7 @@ mod tests {
     }
 
     #[test]
-    fn test_request_more_than_allowed_data_length() {
+    fn usds_request_more_than_allowed_data_length() {
         let from = Pubkey::new_unique();
         let from_account = AccountSharedData::new(100, 0, &system_program::id());
         let to = Pubkey::new_unique();
@@ -894,7 +894,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_already_in_use() {
+    fn usds_create_already_in_use() {
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
         let from_account = AccountSharedData::new(100, 0, &system_program::id());
@@ -987,7 +987,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_unsigned() {
+    fn usds_create_unsigned() {
         // Attempt to create an account without signing the transfer
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
@@ -1073,7 +1073,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_sysvar_invalid_id_with_feature() {
+    fn usds_create_sysvar_invalid_id_with_feature() {
         // Attempt to create system account in account already owned by another program
         let from = Pubkey::new_unique();
         let from_account = AccountSharedData::new(100, 0, &system_program::id());
@@ -1106,7 +1106,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_data_populated() {
+    fn usds_create_data_populated() {
         // Attempt to create system account in account with populated data
         let new_owner = Pubkey::from([9; 32]);
         let from = Pubkey::new_unique();
@@ -1142,7 +1142,7 @@ mod tests {
     }
 
     #[test]
-    fn test_create_from_account_is_nonce_fail() {
+    fn usds_create_from_account_is_nonce_fail() {
         let nonce = Pubkey::new_unique();
         let nonce_account = AccountSharedData::new_data(
             42,
@@ -1178,7 +1178,7 @@ mod tests {
     }
 
     #[test]
-    fn test_assign() {
+    fn usds_assign() {
         let new_owner = Pubkey::from([9; 32]);
         let pubkey = Pubkey::new_unique();
         let account = AccountSharedData::new(100, 0, &system_program::id());
@@ -1238,7 +1238,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_bogus_instruction() {
+    fn usds_process_bogus_instruction() {
         // Attempt to assign with no accounts
         let instruction = SystemInstruction::Assign {
             owner: Pubkey::new_unique(),
@@ -1269,7 +1269,7 @@ mod tests {
     }
 
     #[test]
-    fn test_transfer_lamports() {
+    fn usds_transfer_lamports() {
         let from = Pubkey::new_unique();
         let from_account = AccountSharedData::new(100, 0, &system_program::id());
         let to = Pubkey::from([3; 32]);
@@ -1341,7 +1341,7 @@ mod tests {
     }
 
     #[test]
-    fn test_transfer_with_seed() {
+    fn usds_transfer_with_seed() {
         let base = Pubkey::new_unique();
         let base_account = AccountSharedData::new(100, 0, &Pubkey::from([2; 32])); // account owner should not matter
         let from_seed = "42".to_string();
@@ -1417,7 +1417,7 @@ mod tests {
     }
 
     #[test]
-    fn test_transfer_lamports_from_nonce_account_fail() {
+    fn usds_transfer_lamports_from_nonce_account_fail() {
         let from = Pubkey::new_unique();
         let from_account = AccountSharedData::new_data(
             100,
@@ -1484,7 +1484,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_nonce_ix_no_acc_data_fail() {
+    fn usds_process_nonce_ix_no_acc_data_fail() {
         let none_address = Pubkey::new_unique();
         process_nonce_instruction(
             system_instruction::advance_nonce_account(&none_address, &none_address),
@@ -1493,7 +1493,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_nonce_ix_no_keyed_accs_fail() {
+    fn usds_process_nonce_ix_no_keyed_accs_fail() {
         process_instruction(
             &serialize(&SystemInstruction::AdvanceNonceAccount).unwrap(),
             Vec::new(),
@@ -1503,7 +1503,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_nonce_ix_only_nonce_acc_fail() {
+    fn usds_process_nonce_ix_only_nonce_acc_fail() {
         let pubkey = Pubkey::new_unique();
         process_instruction(
             &serialize(&SystemInstruction::AdvanceNonceAccount).unwrap(),
@@ -1518,7 +1518,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_nonce_ix_ok() {
+    fn usds_process_nonce_ix_ok() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         #[allow(deprecated)]
@@ -1585,7 +1585,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_withdraw_ix_no_acc_data_fail() {
+    fn usds_process_withdraw_ix_no_acc_data_fail() {
         let nonce_address = Pubkey::new_unique();
         process_nonce_instruction(
             system_instruction::withdraw_nonce_account(
@@ -1599,7 +1599,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_withdraw_ix_no_keyed_accs_fail() {
+    fn usds_process_withdraw_ix_no_keyed_accs_fail() {
         process_instruction(
             &serialize(&SystemInstruction::WithdrawNonceAccount(42)).unwrap(),
             Vec::new(),
@@ -1609,7 +1609,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_withdraw_ix_only_nonce_acc_fail() {
+    fn usds_process_withdraw_ix_only_nonce_acc_fail() {
         let nonce_address = Pubkey::new_unique();
         process_instruction(
             &serialize(&SystemInstruction::WithdrawNonceAccount(42)).unwrap(),
@@ -1624,7 +1624,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_withdraw_ix_ok() {
+    fn usds_process_withdraw_ix_ok() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         let pubkey = Pubkey::new_unique();
@@ -1665,7 +1665,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_initialize_ix_no_keyed_accs_fail() {
+    fn usds_process_initialize_ix_no_keyed_accs_fail() {
         process_instruction(
             &serialize(&SystemInstruction::InitializeNonceAccount(Pubkey::default())).unwrap(),
             Vec::new(),
@@ -1675,7 +1675,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_initialize_ix_only_nonce_acc_fail() {
+    fn usds_process_initialize_ix_only_nonce_acc_fail() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         process_instruction(
@@ -1691,7 +1691,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_initialize_ix_ok() {
+    fn usds_process_initialize_ix_ok() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         #[allow(deprecated)]
@@ -1725,7 +1725,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_authorize_ix_ok() {
+    fn usds_process_authorize_ix_ok() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         #[allow(deprecated)]
@@ -1769,7 +1769,7 @@ mod tests {
     }
 
     #[test]
-    fn test_process_authorize_bad_account_data_fail() {
+    fn usds_process_authorize_bad_account_data_fail() {
         let nonce_address = Pubkey::new_unique();
         process_nonce_instruction(
             system_instruction::authorize_nonce_account(
@@ -1782,7 +1782,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_system_account_kind_system_ok() {
+    fn usds_get_system_account_kind_system_ok() {
         let system_account = AccountSharedData::default();
         assert_eq!(
             get_system_account_kind(&system_account),
@@ -1791,7 +1791,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_system_account_kind_nonce_ok() {
+    fn usds_get_system_account_kind_nonce_ok() {
         let nonce_account = AccountSharedData::new_data(
             42,
             &nonce::state::Versions::new(nonce::State::Initialized(nonce::state::Data::default())),
@@ -1805,7 +1805,7 @@ mod tests {
     }
 
     #[test]
-    fn test_get_system_account_kind_uninitialized_nonce_account_fail() {
+    fn usds_get_system_account_kind_uninitialized_nonce_account_fail() {
         assert_eq!(
             get_system_account_kind(&nonce_account::create_account(42).borrow()),
             None
@@ -1813,14 +1813,14 @@ mod tests {
     }
 
     #[test]
-    fn test_get_system_account_kind_system_owner_nonzero_nonnonce_data_fail() {
+    fn usds_get_system_account_kind_system_owner_nonzero_nonnonce_data_fail() {
         let other_data_account =
             AccountSharedData::new_data(42, b"other", &Pubkey::default()).unwrap();
         assert_eq!(get_system_account_kind(&other_data_account), None);
     }
 
     #[test]
-    fn test_get_system_account_kind_nonsystem_owner_with_nonce_data_fail() {
+    fn usds_get_system_account_kind_nonsystem_owner_with_nonce_data_fail() {
         let nonce_account = AccountSharedData::new_data(
             42,
             &nonce::state::Versions::new(nonce::State::Initialized(nonce::state::Data::default())),
@@ -1831,7 +1831,7 @@ mod tests {
     }
 
     #[test]
-    fn test_nonce_initialize_with_empty_recent_blockhashes_fail() {
+    fn usds_nonce_initialize_with_empty_recent_blockhashes_fail() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         #[allow(deprecated)]
@@ -1868,7 +1868,7 @@ mod tests {
     }
 
     #[test]
-    fn test_nonce_advance_with_empty_recent_blockhashes_fail() {
+    fn usds_nonce_advance_with_empty_recent_blockhashes_fail() {
         let nonce_address = Pubkey::new_unique();
         let nonce_account = nonce_account::create_account(1_000_000).into_inner();
         #[allow(deprecated)]
@@ -1932,7 +1932,7 @@ mod tests {
     }
 
     #[test]
-    fn test_nonce_account_upgrade_check_owner() {
+    fn usds_nonce_account_upgrade_check_owner() {
         let nonce_address = Pubkey::new_unique();
         let versions = NonceVersions::Legacy(Box::new(NonceState::Uninitialized));
         let nonce_account = AccountSharedData::new_data(
@@ -1970,7 +1970,7 @@ mod tests {
     }
 
     #[test]
-    fn test_nonce_account_upgrade() {
+    fn usds_nonce_account_upgrade() {
         let nonce_address = Pubkey::new_unique();
         let versions = NonceVersions::Legacy(Box::new(NonceState::Uninitialized));
         let nonce_account = new_nonce_account(versions);
@@ -2065,7 +2065,7 @@ mod tests {
     }
 
     #[test]
-    fn test_assign_native_loader_and_transfer() {
+    fn usds_assign_native_loader_and_transfer() {
         for size in [0, 10] {
             let pubkey = Pubkey::new_unique();
             let account = AccountSharedData::new(100, size, &system_program::id());

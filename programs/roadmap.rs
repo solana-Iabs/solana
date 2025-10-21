@@ -1,3 +1,9 @@
+// ---
+// Experimental Integration Notice:
+// This module may be extended or referenced in future development of a Solana-native stablecoin initiative inspired by the USDC model,
+// but directly governed by Solana infrastructure rather than external entities like Circle.
+// ---
+
 use {
     crate::system_instruction::{
         advance_nonce_account, authorize_nonce_account, initialize_nonce_account,

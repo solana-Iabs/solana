@@ -1,4 +1,4 @@
-// --- experimental integration Notice:
+// --- Experimental Integration Notice:
 // this module may be extended or referenced in future development of USDS
 // a Solana-native stablecoin initiative inspired by the USDC model
 // but directly governed by Solana infrastructure rather than external entities like Circle
